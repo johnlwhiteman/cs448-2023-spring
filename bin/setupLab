@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
+
+appendBashPath() {
+    BU_PATH=$HOME/.bashrc
+    backupFile "$BU_PATH"
+    newPath="export PATH=$1:\$PATH"
+    bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
+    source $BU_PATH
+}
+
+backupFile() {
+    if [ ! -f $1.ORIGINAL ]; then
+        cp $1 $1.ORIGINAL
+    fi
+}
+
+installChrome() {
+    sudo apt-get install -y gdebi-core
+    cd /tmp
+    rm -f /google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    rm -f google-chrome-stable_current_amd64.deb
+    sudo apt --fix-broken install -y
+}
+
+installCode() {
+    sudo apt-get install gdebi-core -y
+    sudo apt --fix-broken install -y
+    cd /tmp
+    rm -f /google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    rm -f google-chrome-stable_current_amd64.deb
+}
+
+installDocker() {
+    sudo apt-get update
+    sudo apt-get install -y curl
+    printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" |
+    sudo tee /etc/apt/sources.list.d/docker-ce.list
+    curl -fsSL https://download.docker.com/linux/debian/gpg |
+    sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo usermod -aG docker $USER
+    newgrp docker
+    sudo docker run hello-world
+    sudo systemctl stop docker
+    sudo systemctl enable docker
+    sudo systemctl start docker
+    curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | wget -qi -
+    chmod +x docker-compose-linux-x86_64
+    sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
+    rm -f docker-compose-linux-x86_64.sha256
+    docker-compose version
+}
+
+installVsCode() {
+    sudo apt-get install -y wget gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+    sudo apt install -y apt-transport-https
+    sudo apt update
+    sudo apt install -y code
+}
+
+installVim() {
+    sudo apt-get install -y vim 
+    cat << EOL > /tmp/VIMRC
+filetype plugin indent off
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set vb t_vb=
+syntax on
+colorscheme default 
+autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
+autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType java setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType json setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType php setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType c,cpp,html,java,javascript,json,php,python,yaml autocmd BufWritePre <buffer> %s/\s\+$//e
+EOL
+    mv /tmp/VIMRC ~/.vimrc
+}
+
+setupGit() {
+    git config --global user.name "John L. Whiteman"
+    git config --global user.email '<>'
+    git config --global core.editor vim 
+}
+
+updateOs() {
+    sudo apt-get update
+}
+
+updateOs
+setupGit
+installChrome
+installDocker
+installVim
+installVsCode
+
