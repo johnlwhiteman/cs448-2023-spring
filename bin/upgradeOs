@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Set to non-interactive mode
+export DEBIAN_FRONTEND=noninteractive
+
+# Remove any unnecessary components 
+sudo apt autoremove -y
+
+# Get the latest info about versions 
+sudo apt-get update
+
+# Download and install the latest updates 
+sudo apt-get upgrade -y
+
+# Remove any outdated components 
+sudo apt-get dist-upgrade -y
+
+# Remove any unnecessary components 
+sudo apt autoremove -y
+
+echo "Please Reboot Your System"
+
