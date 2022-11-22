@@ -1,4 +1,6 @@
-# Topics in Cybersecurity - 40320 - CS 448/548 - A 
+# Topics in Cybersecurity CS448/CS548 
+
+## Details
 * Spring 2023
 
 ## Repo 
