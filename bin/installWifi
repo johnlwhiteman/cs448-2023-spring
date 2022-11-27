@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-#sudo apt-get update
-#sudo apt-get upgrade -y
-#sudo apt-get dist-upgrade -y
-#sudo reboot
-rm -fr rtl8812au
-sudo apt-get install –y linux-headers-$(uname -r)
-sudo apt-get install realtek-rtl88xxau-dkms
-sudo apt-get install dkms
-https://github.com/aircrack-ng
-git clone https://github.com/aircrack-ng/rtl8812au
-cd rtl8812au
-make
-sudo make install
-cd ../
-rm -fr rtl8812au
-echo "REBOOT AGAIN"
+    
+installRtl8812au() {
+    rm -fr rtl8812au
+    sudo apt-get install -y linux-headers-$(uname -r)
+    sudo apt-get install -y realtek-rtl88xxau-dkms dkms
+    git clone https://github.com/aircrack-ng/rtl8812au
+    cd rtl8812au
+    make
+    sudo make install
+    cd ../
+    rm -fr rtl8812au
+}
+
+installRtl8812au
+iwconfig
+echo "Reboot"
