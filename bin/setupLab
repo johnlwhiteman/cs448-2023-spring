@@ -97,19 +97,40 @@ EOL
 }
 
 setupGit() {
-    git config --global user.name "John L. Whiteman"
-    git config --global user.email '<>'
+    git config --global user.name "$1" 
+    git config --global user.email "<>"
     git config --global core.editor vim 
+}
+
+setupSsh() {
+    path=~/.ssh/id_ed25519
+    if [[ -f "$path" ]]; then
+	echo "SSH keys already exist. Ignoring setup."
+        return
+    fi
+    echo -n "Enter a passphrase for SSH:  "
+    read -s passphrase 
+    ssh-keygen -t ed25519 -f "$path" -C "$1" -N "$2" <<< $'\ny'
+    chmod 700 ~/.ssh
+    chmod 644 ~/.ssh/id_ed25519.pub
+    chmod 600 ~/.ssh/id_ed25519
+    ls -al ~/.ssh
+    echo -e "\nHere is your public key:\n"
+    cat ~/.ssh/id_ed25519.pub
 }
 
 updateOs() {
     sudo apt-get update
 }
 
+echo -n "Your full name: "
+read name
+echo -n "Your e-mail: "
+read email
+setupSsh "$email" "$passphrase"
 updateOs
-setupGit
+setupGit "$name" "$email"
 installVim
 installChrome
 installVsCode
 installDocker
-
