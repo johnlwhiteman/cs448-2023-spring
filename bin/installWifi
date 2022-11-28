@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-    
+
+installRtl88x2bu() {
+    sudo apt-get install -y linux-headers-$(uname -r)
+    sudo git clone "https://github.com/RinCat/RTL88x2BU-Linux-Driver.git" /usr/src/rtl88x2bu-git
+    sudo sed -i 's/PACKAGE_VERSION="@PKGVER@"/PACKAGE_VERSION="git"/g' /usr/src/rtl88x2bu-git/dkms.conf
+    sudo dkms add -m rtl88x2bu -v git
+    sudo dkms autoinstall
+}
+
 installRtl8812au() {
     rm -fr rtl8812au
     sudo apt-get install -y linux-headers-$(uname -r)
@@ -13,5 +21,7 @@ installRtl8812au() {
 }
 
 installRtl8812au
+installRtl88x2bu
 iwconfig
-echo "Reboot"
+echo "Reboot the system or forever hold your peace!"
+
