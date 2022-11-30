@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "🐕Rottweiler says please enter some plaintext:"
+tr 'A-Za-z' 'N-ZA-Mn-za-m'
