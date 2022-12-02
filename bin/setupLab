@@ -60,6 +60,10 @@ installDocker() {
     docker-compose version
 }
 
+installMisc() {
+    sudo apt-get install -y libimage-exiftool-perl poppler-utils 
+}
+
 installVsCode() {
     sudo apt-get install -y wget gpg
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -134,3 +138,4 @@ installVim
 installChrome
 installVsCode
 installDocker
+installMisc
