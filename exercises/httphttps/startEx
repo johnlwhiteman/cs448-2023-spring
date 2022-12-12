@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+source .env
+
+startIt() {
+    docker rm -f ${NAME} 2>/dev/null
+    rc=$(docker image inspect ${NAME} 2>/dev/null)
+    if [ $? -ne 0 ]; then
+        docker build -t ${NAME} .
+    fi
+    docker run -d -p ${PORT}:${PORT} --name ${NAME} ${NAME}
+    ./shellEx
+}
+
+startItWithCompose() {
+    docker compose up -d
+}
+
+if (($# > 0)) 
+then
+    startIt
+else
+    startItWithCompose
+fi

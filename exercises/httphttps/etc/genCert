@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+openssl req -new -newkey rsa:4096 -sha384 -days 365 -nodes -x509 \
+    -subj "/C=US/ST=Oregon/L=Portland/O=Dis/CN=up.edu" \
+    -keyout key.pem -out cert.pem

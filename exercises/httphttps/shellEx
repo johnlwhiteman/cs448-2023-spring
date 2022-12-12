@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+source .env
+
+if (( $# > 0 )) 
+then
+    if [[ $1 == "http" ]]
+    then
+        docker exec -it ${HTTP} bash
+    elif [[ $1 == "https" ]]
+    then
+        docker exec -it ${HTTPS} bash
+    else
+        echo "Don't know what you want: $1 != [http/https]?"
+        exit 1
+    fi
+else
+    docker exec -it ${NAME} bash 
+fi

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+source .env
+docker compose down 2>/dev/null
+docker rm -f $(docker ps | grep "${NAME}" | awk '{print $1}') 2>/dev/null
+docker rmi -f $(docker images | grep "${NAME}" | awk '{print $3}') 2>/dev/null
