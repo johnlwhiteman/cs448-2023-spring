@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
+export TDIR="${PDIR}/tools"
 
 appendBashPath() {
     BU_PATH=$HOME/.bashrc
     backupFile "$BU_PATH"
     newPath="export PATH=$1:\$PATH"
     bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
-    source $BU_PATH
+    source $BU_PATH 2>/dev/null
+}
+
+appendZshPath() {
+    BU_PATH=$HOME/.zshrc
+    backupFile "$BU_PATH"
+    newPath="export PATH=$1:\$PATH"
+    bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
+    source $BU_PATH 2>/dev/null
 }
 
 backupFile() {
@@ -18,28 +27,16 @@ backupFile() {
 
 installChrome() {
     sudo apt-get install -y gdebi-core
-    cd /tmp
-    rm -f /google-chrome-stable_current_amd64.deb
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-    rm -f google-chrome-stable_current_amd64.deb
+    rm -f /tmp/google-chrome-stable_current_amd64.deb /tmp/chrome.deb 
+    curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb
+    sudo dpkg -i /tmp/chrome.deb
+    rm -f /tmp/chrome.deb
     sudo apt --fix-broken install -y
-    cd $DIR
-}
-
-installCode() {
-    sudo apt-get install gdebi-core -y
-    sudo apt --fix-broken install -y
-    cd /tmp
-    rm -f /google-chrome-stable_current_amd64.deb
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-    rm -f google-chrome-stable_current_amd64.deb
     cd $DIR
 }
 
 installDocker() {
-    sudo apt-get update
+    rm -f /tmp/docker-compose
     sudo apt-get install -y curl
     printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" |
     sudo tee /etc/apt/sources.list.d/docker-ce.list
@@ -53,11 +50,35 @@ installDocker() {
     sudo systemctl stop docker
     sudo systemctl enable docker
     sudo systemctl start docker
-    curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | wget -qi -
-    chmod +x docker-compose-linux-x86_64
-    sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
-    rm -f docker-compose-linux-x86_64.sha256
+    url=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | grep -v "sha")
+    curl $url -o /tmp/docker-compose
+    chmod +x /tmp/docker-compose 
+    sudo mv /tmp/docker-compose /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
     docker-compose version
+}
+
+installGhidra() {
+    export GDIR="${TDIR}/ghidra"
+    export URL=https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.2_build/ghidra_10.2.2_PUBLIC_20221115.zip
+    #rm -fr /tmp/ghidra* ${GDIR}
+    #cd /tmp
+    #rm -f /tmp/ghidra*
+   # curl $URL -o /tmp/ghidra.zip
+    #unzip /tmp/ghidra*.zip 
+    #rm -fr /tmp/ghidra*.zip
+    #mkdir -p ${GDIR}
+    #mv /tmp/ghidra* "${GDIR}/ghidra"
+    #rm -fr /tmp/ghidra* 
+    #cd "$GDIR"
+    #cp -r ./ghidra/* ./
+    #rm -fr ./ghidra
+    appendBashPath "${GDIR}"
+    appendZshPath "${GDIR}"
+}
+
+installJava() {
+    sudo apt-get install -y default-jdk
 }
 
 installMisc() {
@@ -69,14 +90,17 @@ installPython() {
 }
 
 installVsCode() {
-    sudo apt-get install -y wget gpg
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    rm -fr /tmp/microsoft.asc /tmp/packages.microsoft.gpg
+    sudo apt --fix-broken install -y
+    sudo apt-get install -y gdebi-core gpg 
+    curl https://packages.microsoft.com/keys/microsoft.asc -o /tmp/microsoft.asc
+    cat /tmp/microsoft.asc | gpg --dearmor > /tmp/packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 /tmp/packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
     sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    rm -f packages.microsoft.gpg
     sudo apt install -y apt-transport-https
     sudo apt update
     sudo apt install -y code
+    rm -fr /tmp/microsoft.asc /tmp/packages.microsoft.gpg
 }
 
 installVim() {
@@ -143,4 +167,6 @@ installChrome
 installVsCode
 installDocker
 installPython
+installGhidra
 installMisc
+echo "Please reboot system"
