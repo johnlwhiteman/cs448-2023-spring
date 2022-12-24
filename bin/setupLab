@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
-export TDIR="${PDIR}/tools"
 
 # NewPath .bashrc | .zshrc
 appendPath() {
     BU_PATH=$HOME/$2
     backupFile "$BU_PATH"
-    newPath="export PATH=$1:\$PATH"
-    bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
+    newPath="export PATH=$1:\${PATH}"
+    grep -qF "$newPath" $BU_PATH || echo "$newPath" >> $BU_PATH
     source $BU_PATH 2>/dev/null
 }
 
@@ -70,6 +69,7 @@ installMisc
 ${DIR}/setupChrome
 ${DIR}/setupDocker
 ${DIR}/setupGhidra
+${DIR}/setupRadamsa
 ${DIR}/setupVim
 ${DIR}/setupVsCode
 echo "Please reboot system"
