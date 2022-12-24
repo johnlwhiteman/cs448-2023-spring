@@ -3,16 +3,9 @@ export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
 export TDIR="${PDIR}/tools"
 
-appendBashPath() {
-    BU_PATH=$HOME/.bashrc
-    backupFile "$BU_PATH"
-    newPath="export PATH=$1:\$PATH"
-    bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
-    source $BU_PATH 2>/dev/null
-}
-
-appendZshPath() {
-    BU_PATH=$HOME/.zshrc
+# NewPath .bashrc | .zshrc
+appendPath() {
+    BU_PATH=$HOME/$2
     backupFile "$BU_PATH"
     newPath="export PATH=$1:\$PATH"
     bash -c "grep -q -F '$newPath' $BU_PATH || echo '$newPath' >> $BU_PATH"
@@ -25,40 +18,6 @@ backupFile() {
     fi
 }
 
-installChrome() {
-    sudo apt-get install -y gdebi-core
-    rm -f /tmp/google-chrome-stable_current_amd64.deb /tmp/chrome.deb 
-    curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb
-    sudo dpkg -i /tmp/chrome.deb
-    rm -f /tmp/chrome.deb
-    sudo apt --fix-broken install -y
-    cd $DIR
-}
-
-installDocker() {
-    rm -f /tmp/docker-compose
-    sudo apt-get install -y curl
-    printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" |
-    sudo tee /etc/apt/sources.list.d/docker-ce.list
-    curl -fsSL https://download.docker.com/linux/debian/gpg |
-    sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
-    sudo apt update
-    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    sudo usermod -aG docker $USER
-    newgrp docker
-    sudo docker run hello-world
-    sudo systemctl stop docker
-    sudo systemctl enable docker
-    sudo systemctl start docker
-    url=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | grep -v "sha")
-    curl $url -o /tmp/docker-compose
-    chmod +x /tmp/docker-compose 
-    sudo mv /tmp/docker-compose /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-    docker-compose version
-}
-
-
 installJava() {
     sudo apt-get install -y default-jdk
 }
@@ -69,45 +28,6 @@ installMisc() {
 
 installPython() {
     pip install -y Flask
-}
-
-installVsCode() {
-    rm -fr /tmp/microsoft.asc /tmp/packages.microsoft.gpg
-    sudo apt --fix-broken install -y
-    sudo apt-get install -y gdebi-core gpg 
-    curl https://packages.microsoft.com/keys/microsoft.asc -o /tmp/microsoft.asc
-    cat /tmp/microsoft.asc | gpg --dearmor > /tmp/packages.microsoft.gpg
-    sudo install -D -o root -g root -m 644 /tmp/packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    sudo apt install -y apt-transport-https
-    sudo apt update
-    sudo apt install -y code
-    rm -fr /tmp/microsoft.asc /tmp/packages.microsoft.gpg
-}
-
-installVim() {
-    sudo apt-get install -y vim 
-    cat << EOL > /tmp/VIMRC
-filetype plugin indent off
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set vb t_vb=
-syntax on
-colorscheme default 
-autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType java setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType json setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType php setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType c,cpp,html,java,javascript,json,php,python,yaml autocmd BufWritePre <buffer> %s/\s\+$//e
-EOL
-    mv /tmp/VIMRC ~/.vimrc
 }
 
 setupGit() {
@@ -144,10 +64,12 @@ read email
 setupSsh "$email" "$passphrase"
 updateOs
 setupGit "$name" "$email"
-installVim
-installChrome
 installVsCode
-installDocker
 installPython
 installMisc
+${DIR}/setupChrome
+${DIR}/setupDocker
+${DIR}/setupGhidra
+${DIR}/setupVim
+${DIR}/setupVsCode
 echo "Please reboot system"

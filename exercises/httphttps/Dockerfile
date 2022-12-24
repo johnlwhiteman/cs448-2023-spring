@@ -4,7 +4,7 @@ ENV PDIR=/home/${NAME}
 ENV PYTHONUNBUFFERED=1
 RUN adduser -D ${NAME}
 WORKDIR ${PDIR}
-COPY --chown=${NAME} /etc/* ./
+COPY --chown=${NAME} /assets/* ./
 RUN apk update --no-cache \
     && apk add bash openssl python3 vim \
     && ln -sf /usr/bin/python3 /usr/bin/python \

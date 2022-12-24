@@ -12,7 +12,7 @@
 wireshark -i loopback
 
 # Open another terminal and start the containers
-./shellEx
+./shellIt
 
 # Open a browser window and navigate to the HTTP connection
 firefox http://127.0.0.1:12345
@@ -24,10 +24,10 @@ firefox https://127.0.0.1:54321
 # For Chrome press Ctrl+Shift+R to ensure data is fresh (avoid the not-modified)
 
 # Interact with the HTTP container (optional)
-./startEx http  # Type exit when done
+./startIt http  # Type exit when done
 
 # Interact with the HTTPS container (optional)
-./startEx https # Type exit when done
+./startIt https # Type exit when done
 
 # Stop the exercise and tear down the containers/images
-./stopEx
+./stopIt

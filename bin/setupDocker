@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+installDocker() {
+    sudo apt-get install -y curl
+    rm -f /tmp/docker-compose
+    url=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | grep -v "sha")
+    curl -L $url -o /tmp/docker-compose
+    chmod +x /tmp/docker-compose 
+    sudo mv /tmp/docker-compose /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+    docker-compose version
+    printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" |
+    sudo tee /etc/apt/sources.list.d/docker-ce.list
+    curl -fsSL https://download.docker.com/linux/debian/gpg |
+    sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo usermod -aG docker $USER
+    newgrp docker
+    sudo docker run hello-world
+    sudo systemctl stop docker
+    sudo systemctl enable docker
+    sudo systemctl start docker
+}
+
+installDocker
