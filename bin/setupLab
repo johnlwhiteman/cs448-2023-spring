@@ -58,24 +58,6 @@ installDocker() {
     docker-compose version
 }
 
-installGhidra() {
-    export GDIR="${TDIR}/ghidra"
-    export URL=https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.2_build/ghidra_10.2.2_PUBLIC_20221115.zip
-    #rm -fr /tmp/ghidra* ${GDIR}
-    #cd /tmp
-    #rm -f /tmp/ghidra*
-   # curl $URL -o /tmp/ghidra.zip
-    #unzip /tmp/ghidra*.zip 
-    #rm -fr /tmp/ghidra*.zip
-    #mkdir -p ${GDIR}
-    #mv /tmp/ghidra* "${GDIR}/ghidra"
-    #rm -fr /tmp/ghidra* 
-    #cd "$GDIR"
-    #cp -r ./ghidra/* ./
-    #rm -fr ./ghidra
-    appendBashPath "${GDIR}"
-    appendZshPath "${GDIR}"
-}
 
 installJava() {
     sudo apt-get install -y default-jdk
@@ -167,6 +149,5 @@ installChrome
 installVsCode
 installDocker
 installPython
-installGhidra
 installMisc
 echo "Please reboot system"
