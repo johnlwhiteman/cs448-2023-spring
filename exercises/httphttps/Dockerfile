@@ -5,8 +5,8 @@ ENV PYTHONUNBUFFERED=1
 RUN adduser -D ${NAME}
 WORKDIR ${PDIR}
 COPY --chown=${NAME} /assets/* ./
-RUN apk update --no-cache \
-    && apk add bash openssl python3 vim \
+RUN apk update \
+    && apk --no-cache add bash openssl python3 vim \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && python3 -m ensurepip \
     && ln -sf /usr/bin/pip3 /usr/bin/pip \
