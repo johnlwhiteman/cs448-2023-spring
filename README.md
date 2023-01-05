@@ -17,6 +17,13 @@ cd cs448-2023/bin
 ./setupLab 
 ```
 
+* Moving forward students should run the updateLab script before the start of each class to get the latest content
+
+```bash
+cd cs448-2023/bin
+./updateLab
+```
+
 ## References
 
 * https://github.com/johnlwhiteman/cs448-2023-spring
