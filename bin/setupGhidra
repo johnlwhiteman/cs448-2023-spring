@@ -20,13 +20,16 @@ backupFile() {
 }
 
 installGhidra() {
-    rm -fr "$IDIR" /tmp/ghidra*
+    rm -fr "$IDIR"
     cd /tmp
-    curl -L "$URL" -o "/tmp/ghidra.zip"    
-    unzip "/tmp/ghidra.zip"
-    rm -f "/tmp/ghidra.zip"
+    if [ ! -f "/tmp/ghidra.zip" ]; then  
+        curl -L "$URL" -o "/tmp/ghidra.zip"    
+    fi
+    unzip -o "/tmp/ghidra.zip"
     tmpDir="/tmp/$(ls /tmp | grep ghidra_)"
-    mv "$tmpDir" "$IDIR"
+    unzip -o "/tmp/ghidra.zip"
+    cp -R "$tmpDir" "$IDIR"
+    rm -fr "$tmpDir"
     appendPath "$IDIR" ".bashrc"
     appendPath "$IDIR" ".zshrc"
 }

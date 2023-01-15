@@ -19,6 +19,7 @@ backupFile() {
 
 installJava() {
     sudo apt-get install -y default-jdk
+    javac --version
 }
 
 installMisc() {
@@ -26,7 +27,7 @@ installMisc() {
 }
 
 installPython() {
-    pip install -y Flask
+    pip install Flask
 }
 
 setupGit() {
@@ -36,6 +37,10 @@ setupGit() {
 }
 
 setupSsh() {
+    sudo systemctl enable ssh
+    sudo systemctl start ssh
+    sudo systemctl status ssh
+    return
     path=~/.ssh/id_ed25519
     if [[ -f "$path" ]]; then
 	echo "SSH keys already exist. Ignoring setup."
@@ -56,6 +61,7 @@ updateOs() {
     sudo apt-get update
 }
 
+sudo echo -e "\nWelcome!\n"
 echo -n "Your full name: "
 read name
 echo -n "Your e-mail: "
@@ -63,7 +69,8 @@ read email
 setupSsh "$email" "$passphrase"
 updateOs
 setupGit "$name" "$email"
-installVsCode
+setupSsh
+installJava
 installPython
 installMisc
 ${DIR}/setupChrome
@@ -73,4 +80,3 @@ ${DIR}/setupRadamsa
 ${DIR}/setupVim
 ${DIR}/setupVsCode
 echo "Please reboot system"
-
