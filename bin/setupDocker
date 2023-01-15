@@ -9,7 +9,7 @@ installDocker() {
     sudo usermod -aG docker $USER 
     sudo docker run hello-world
     sudo systemctl stop docker >/dev/null 2>&1
-    sudo systemctl stop containerd >/dev/null 2>71
+    sudo systemctl stop containerd >/dev/null 2>&1
     sudo systemctl enable docker
     sudo systemctl enable containerd
     sudo systemctl start docker

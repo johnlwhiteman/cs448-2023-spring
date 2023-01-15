@@ -9,6 +9,9 @@ sudo -E apt autoremove -y
 # Get the latest info about versions 
 sudo -E apt-get update
 
+# Fun stuff that is critical
+sudo apt-get install -y cowsay lolcat
+
 # Download and install the latest updates 
 sudo -E apt-get upgrade -y
 
@@ -18,5 +21,4 @@ sudo -E apt-get dist-upgrade -y
 # Remove any unnecessary components 
 sudo -E apt autoremove -y
 
-echo "Please Reboot Your System"
-
+cowsay "Please ReMOOt This VM" | lolcat
