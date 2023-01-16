@@ -22,8 +22,8 @@ installJava() {
 }
 
 installMisc() {
-    sudo apt-get install -y cmatrix cowsay gobuster lolcat \ 
-                            libimage-exiftool-perl / poppler-utils tree
+    sudo apt-get install -y cmatrix cowsay gobuster lolcat \
+                            libimage-exiftool-perl poppler-utils tree
 }
 
 installPython() {
@@ -61,7 +61,6 @@ updateOs() {
     sudo apt-get update
 }
 sudo echo -e "\nWelcome!\n"
-${DIR}/runMatrix 2
 
 echo -n "Enter your full name: "
 read name
@@ -80,4 +79,5 @@ ${DIR}/setupGhidra
 ${DIR}/setupRadamsa
 ${DIR}/setupVim
 ${DIR}/setupVsCode
+${DIR}/runMatrix 2
 cowsay "Please ReMOOt This VM" | lolcat
