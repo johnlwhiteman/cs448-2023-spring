@@ -39,7 +39,6 @@ setupGit() {
 setupSsh() {
     sudo systemctl enable ssh
     sudo systemctl start ssh
-    sudo systemctl status ssh
     return
     path=~/.ssh/id_ed25519
     if [[ -f "$path" ]]; then
@@ -69,7 +68,6 @@ read email
 setupSsh "$email" "$passphrase"
 updateOs
 setupGit "$name" "$email"
-setupSsh
 installJava
 installPython
 installMisc

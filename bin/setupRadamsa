@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
-export IDIR="${PDIR}/tools/radamsa"
+export TDIR="${PDIR}/tools"
+export IDIR="${TDIR}/radamsa"
 export URL=https://gitlab.com/akihe/radamsa
 
 # NewPath .bashrc | .zshrc
@@ -20,17 +21,18 @@ backupFile() {
 }
 
 installRadamsa() {
-    rm -fr /tmp/radamsa "$IDIR"
-    mkdir "$IDIR"
+    rm -fr "$IDIR" /tmp/radamsa
+    mkdir -p "$IDIR"
+    cd /tmp
     git clone "$URL" /tmp/radamsa
     cd /tmp/radamsa
     make
-    cp /tmp/radamsa/bin/radamsa "${IDIR}/radamsa"
+    cp /tmp/radamsa/bin/radamsa "${IDIR}/"
     chmod +x "${IDIR}/radamsa"
     rm -fr /tmp/radamsa
+    ${IDIR}/radamsa -V
     appendPath "$IDIR" ".bashrc"
     appendPath "$IDIR" ".zshrc"
-    ${IDIR}/radamsa -h
 }
 
 installRadamsa
