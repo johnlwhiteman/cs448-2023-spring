@@ -10,7 +10,7 @@ sudo -E apt autoremove -y
 sudo -E apt-get update
 
 # Fun stuff that is critical
-sudo apt-get install -y cowsay lolcat
+sudo apt-get install -y cmatrix cowsay lolcat
 
 # Download and install the latest updates 
 sudo -E apt-get upgrade -y
