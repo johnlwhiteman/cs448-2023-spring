@@ -10,6 +10,7 @@ appendPath() {
     grep -qF "$newPath" $BU_PATH || echo "$newPath" >> $BU_PATH
     source $BU_PATH 2>/dev/null
 }
+
 backupFile() {
     if [ ! -f $1.ORIGINAL ]; then
         cp $1 $1.ORIGINAL
@@ -22,8 +23,7 @@ installJava() {
 }
 
 installMisc() {
-    sudo apt-get install -y cmatrix cowsay gobuster lolcat \
-                            libimage-exiftool-perl poppler-utils tree
+    sudo apt-get install -y cmatrix cowsay gobuster graphicsmagick-imagemagick-compat libreoffice lolcat libimage-exiftool-perl poppler-utils tree
 }
 
 installPython() {
@@ -59,6 +59,7 @@ setupSsh() {
 updateOs() {
     sudo apt-get update
 }
+
 sudo echo -e "\nWelcome!\n"
 echo -n "Enter your full name: "
 read name

@@ -3,6 +3,9 @@
 # Set to non-interactive mode
 export DEBIAN_FRONTEND=noninteractive
 
+# Set sudo at the start
+sudo echo "yo!"
+
 # Remove any unnecessary components 
 sudo -E apt autoremove -y
 
