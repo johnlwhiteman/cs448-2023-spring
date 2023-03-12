@@ -42,9 +42,15 @@ firefox index.html &
 
 ```bash
 ls -al ./output/crashes
-fuzzgoat output/crashes/<pick a file here>  # Should segfault
+fuzzgoat output/crashes/crash-2023.03.12-12.05.05.json  # Example name
 ```
 
+## Debug
+
+```bash
+gdb --args fuzzgoat ./crashes/crash-2023.03.12-12.05.05.json
+run
+```
 
 ## References
 
