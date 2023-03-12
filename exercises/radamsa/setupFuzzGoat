@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+rm -fr ./fuzzgoat
+git clone https://github.com/fuzzstati0n/fuzzgoat.git
+cp ./*.json  ./setupEnv ./testHarness ./fuzzgoat/
+cd ./fuzzgoat
+rm -fr ./.git ./input-files ./seed ./in
+make

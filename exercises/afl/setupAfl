@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-sudo apt-get install gnuplot -y
-./setupEnv
+sudo apt-get update
+sudo apt-get install gdb gnuplot -y
 cd /tmp
 rm -fr /tmp/afl
 git clone https://github.com/mirrorer/afl.git
@@ -8,4 +8,7 @@ cd ./afl
 make
 sudo make install
 cd ../
+sudo sh -c 'echo core >/proc/sys/kernel/core_pattern' # Support core dumps
+ulimit -c unlimited # Core can be unlimited size 
 afl-gcc --version
+rm -fr /tmp/afl

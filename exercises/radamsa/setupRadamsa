@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+sudo apt-get update
+sudo apt-get install -y gdb
+cd /tmp
+rm -fr /tmp/radamsa
+git clone https://gitlab.com/akihe/radamsa.git
+cd ./radamsa
+make
+sudo make install
+cd ../
+rm -fr /tmp/radamsa
+radamsa --version

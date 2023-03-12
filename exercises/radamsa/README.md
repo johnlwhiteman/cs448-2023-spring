@@ -1,9 +1,9 @@
-# Exercise: AFL
+# Exercise: Radamsa
 
 ## Setup
 
 ```bash
-./setupAFl
+./setupRadamsa
 ./setupFuzzGoat
 ```
 
@@ -11,11 +11,6 @@
 
 ```bash
 cd ./fuzzgoat
-vi ./Makefile
-
-#CC=gcc
-CC=afl-gcc
-
 make
 ```
 
@@ -25,8 +20,12 @@ make
 mkdir -p ./input ./output
 cp ./good.json ./input/
 
-# Let it run for awhile
-afl-fuzz -i ./input -o ./output ./fuzzgoat @@
+# Manual repeat ... look for segfault
+radamsa good.json > fuzzed.json
+fuzzgoat fuzzed.json
+
+# Automated
+./testDriver
 ```
 
 ## Analyze
@@ -42,11 +41,17 @@ firefox index.html &
 
 ```bash
 ls -al ./output/crashes
-fuzzgoat output/crashes/<pick a file here>  # Should segfault
+fuzzgoat output/crashes/crash-2023.03.12-12.05.05.json  # Example name
 ```
 
+## Debug
+
+```bash
+gdb --args fuzzgoat ./crashes/crash-2023.03.12-12.05.05.json
+run
+```
 
 ## References
 
-* [AFL](https://github.com/mirrorer/afl)
+* [AFL](https://gitlab.com/akihe/radamsa)
 * [FuzzGoat](https://github.com/fuzzstati0n/fuzzgoat)

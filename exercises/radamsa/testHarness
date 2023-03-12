@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+FUZZER=radamsa
+APP=./fuzzgoat
+SEED=./input/seed.json
+FUZZED=./input/fuzzed.json
+crashes=0
+
+# Initialize
+rm -fr ./input ./crashes
+mkdir ./input ./crashes
+cp ./good.json ./input/seed.json
+
+# Fuzz forever
+while true; do
+
+    # Fuzz the original valid file and save output
+    $FUZZER $SEED > $FUZZED
+
+    # Execute the application using the fuzzed file as input
+    $APP $FUZZED
+
+    # Save the exit status
+    exit_status=$?
+
+    echo "-----------------------------"
+    echo "Exit status: ${exit_status}"
+
+    if [ $exit_status -gt 1 ]; then
+        save=./crashes/crash-$(date +%Y.%m.%d-%H.%M.%S).json
+        echo "Saving crash file to ${save}"
+        cp $FUZZED $save
+        crashes=$((crashes+1)) 
+        sleep 3
+    fi
+
+    echo "Crashes: ${crashes}"
+    echo "-----------------------------"
+
+    sleep 1
+
+done

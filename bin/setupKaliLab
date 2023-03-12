@@ -23,7 +23,7 @@ installJava() {
 }
 
 installMisc() {
-    sudo apt-get install -y cmatrix cowsay gobuster graphicsmagick-imagemagick-compat libreoffice lolcat libimage-exiftool-perl poppler-utils steghide tree
+    sudo apt-get install -y cmatrix cowsay gdb gnuplot gobuster graphicsmagick-imagemagick-compat libreoffice lolcat libimage-exiftool-perl poppler-utils steghide tree
 }
 
 installPython() {
