@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+sudo apt-get install gnuplot -y
+./setupEnv
+cd /tmp
+rm -fr /tmp/afl
+git clone https://github.com/mirrorer/afl.git
+cd ./afl
+make
+sudo make install
+cd ../
+afl-gcc --version
