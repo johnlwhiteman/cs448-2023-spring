@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cd /tmp
+rm -fr /tmp/radamsa
+git clone https://gitlab.com/akihe/radamsa.git 
+cd ./radamsa
+make
+sudo make install
+cd ../
+rm -fr /tmp/radamsa
+radamsa --version
