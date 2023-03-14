@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-all: buffy gets heartbleed memleak printf printfX
+all: buffy gets heartbleed memleak printfv printfvW printfvE
 
 buffy: buffy.c
 	gcc -g $< -o $@
@@ -14,11 +14,14 @@ badmem: memleak.c
 heartbleed: heartbleed.c
 	gcc -g $< -o $@
 
-printf: printf.c
+printfv: printfv.c
 	gcc -g $< -o $@
 
-printfX: printf.c
-	gcc -Wno-format-extra-args -Wformat-security -g $< -o $@
+printfvW: printfv.c
+	gcc -Wformat -Wformat-security -g $< -o $@
+
+printfvE: printfv.c
+	gcc -Wformat -Werror=format-security -g $< -o $@
 
 clean:
-	rm -f buffy gets heartbleed memleak printf printfX
+	rm -f buffy gets heartbleed memleak printfv printfvW
