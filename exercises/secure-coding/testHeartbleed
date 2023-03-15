@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+export SECRET=MySecret
+
+make heartbleed
+./heartbleed PDX 3
+./heartbleed PDX 2500
