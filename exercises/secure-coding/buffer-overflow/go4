@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+make stack4
+export i=1
+export token="A"
+while true; do
+    echo ""
+    echo "Command: ./stack4 '$token'"
+    echo "Length:  $i"
+    ./stack4 "$token"
+    if [ $? -eq 0 ]; then
+        exit
+    fi
+    i=$((i+1))
+    token="${token}A"
+    if (( i > 255 )); then
+        break
+    fi
+done
