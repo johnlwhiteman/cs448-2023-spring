@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-sudo sh -c 'echo core >/proc/sys/kernel/core_pattern' # Support core dumps
-ulimit -c unlimited # Core can be unlimited size
