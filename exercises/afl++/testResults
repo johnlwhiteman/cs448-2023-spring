@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+afl-plot ./output/default ./charts
+cd ./charts
+firefox index.html &

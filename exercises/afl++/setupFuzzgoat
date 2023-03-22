@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-rm -fr ./fuzzgoat
+DIR=./fuzzgoat
 git clone https://github.com/fuzzstati0n/fuzzgoat.git
-cp ./*.json ./fuzzgoat/
-cp ./setupEnv ./fuzzgoat/
 cd ./fuzzgoat
 rm -fr ./.git ./input-files ./seed ./in
 sed -i 's/^CC=afl-gcc/#CC=afl-gcc/' Makefile

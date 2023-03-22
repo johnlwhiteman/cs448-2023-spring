@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 sudo apt-get update
-sudo apt-get install gdb gnuplot -y
+sudo apt-get install build-essential gdb gnuplot -y
 cd /tmp
 rm -fr /tmp/afl
-git clone https://github.com/mirrorer/afl.git
-cd ./afl
+git clone https://github.com/AFLplusplus/AFLplusplus
+cd ./AFLplusplus
 make
 sudo make install
 cd ../
-sudo sh -c 'echo core >/proc/sys/kernel/core_pattern' # Support core dumps
-ulimit -c unlimited # Core can be unlimited size 
 afl-gcc --version
-rm -fr /tmp/afl
+rm -fr /tmp/AFLplusplus
+cd "$DIR"
+mkdir -p ./fuzzgoat/input ./fuzzgoat/output
+cp ./good.json ./fuzzgoat/input/ 
+cp ./testDriver ./testResults ./fuzzgoat/

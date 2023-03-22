@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo bash -c 'echo core >/proc/sys/kernel/core_pattern' # Support core dumps
+ulimit -c unlimited # Core can be unlimited size
+mkdir -p ./input ./output
+cp ./good.json ./input/  # Positive input test case
+afl-fuzz -i ./input -o ./output ./fuzzgoat @@

@@ -1,22 +1,9 @@
-# Exercise: AFL
+# Exercise: AFL++
 
-## Setup
-
-```bash
-./setupAFl
-./setupFuzzGoat
-```
-
-## Compile
+## Setup and compile
 
 ```bash
-cd ./fuzzgoat
-vi ./Makefile
-
-#CC=gcc
-CC=afl-gcc
-
-make
+./setupAll
 ```
 
 ## Execute
