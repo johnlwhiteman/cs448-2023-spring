@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# Stop and purge all containers first
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-
-# Now pruge all images
-docker rmi -f $(docker images -a -q)
