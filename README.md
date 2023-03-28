@@ -2,7 +2,7 @@
 
 ## Details
 
-* This repo contains the content for the Spring 2023 class
+* This repo contains the content for the Spring 2023 class.
 
 ## Setup
 
