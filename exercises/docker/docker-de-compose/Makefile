@@ -1,3 +1,5 @@
+all: up browse 
+
 up:
 	sudo docker compose up -d
 
