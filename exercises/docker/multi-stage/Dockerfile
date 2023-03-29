@@ -1,4 +1,4 @@
-from alpine:latest AS STAGE1
+FROM alpine:latest AS STAGE1
 
 ENV USER Jane
 ENV PASSWORD password12345$
