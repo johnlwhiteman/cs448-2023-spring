@@ -22,5 +22,5 @@ sudo apt-get update
 sudo apt-get install -y nmap
 ${DIR}/setupDocker
 ${DIR}/setupVim
-appendPath .bashrc
+appendPath '.bashrc' '.bashrc-ORIGINAL'
 
