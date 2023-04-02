@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-sudo install wireshark-gnome
+sudo apt update
+sudo install -y wireshark
