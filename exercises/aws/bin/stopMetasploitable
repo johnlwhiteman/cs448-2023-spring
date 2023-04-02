@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+NAME=metasploitable
+sudo docker stop ${NAME}
+sudo docker rm -f ${NAME}
+sudo docker rmi -f ${NAME}
+sudo docker volume rm -f ${NAME}

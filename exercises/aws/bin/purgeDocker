@@ -3,4 +3,5 @@
 sudo docker stop $(docker ps -aq)
 sudo docker rm $(docker ps -aq)
 sudo docker system prune -f -a --volumes
+sudo docker network prune -f -a
 sudo docker rmi $(docker images -q)
