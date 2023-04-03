@@ -27,4 +27,4 @@ ${DIR}/setupWireshark
 ${DIR}/setupDesktop
 ${DIR}/setupBrowsers
 appendPath ${DIR}/ .bashrc 
-cd ${PDIR}/tinywebsite && ./startTinyWebsite 
+cd ${PDIR}/tinywebsite && ./startTinyWebsite &>/dev/null &
