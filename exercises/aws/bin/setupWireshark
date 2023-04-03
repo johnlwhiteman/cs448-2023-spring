@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 sudo apt update
 sudo apt install -y wireshark
-sudo dpkg-reconfigure -y wireshark-common 
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common 
+#sudo dpkg-reconfigure -y wireshark-common 
 sudo usermod -a -G wireshark $USER
 echo "QUIT CONSOLE AND RELOGIN OR REBOOT BEFORE RUNNING WIRESHARK NOT AS ROOT"
