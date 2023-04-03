@@ -1,1 +1,1 @@
-document.getElementById("demo").innerHTML = Math.random();
+document.getElementById("random").innerHTML = Math.random();
