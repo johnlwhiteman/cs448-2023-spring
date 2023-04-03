@@ -1,5 +1,7 @@
 NAME=myweb
 
+all:  build run
+	
 build:
 	sudo docker build -t $(NAME) .
 
