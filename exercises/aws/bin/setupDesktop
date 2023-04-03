@@ -2,6 +2,5 @@
 sudo ufw allow 3389/tcp
 sudo apt update
 sudo apt install -y slim xfce4
-sudo apt install -y xrdp && sudo service xrdp 
-sudo service xrdp restart
+sudo apt install -y xrdp && sudo service xrdp restart
 sudo service slim start # or just reboot

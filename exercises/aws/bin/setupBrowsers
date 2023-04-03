@@ -3,5 +3,4 @@ sudo add-apt-repository -y universe
 sudo apt update
 sudo apt install -y lynx
 sudo apt install netsurf-gtk
-cp /usr/bin/netsurf-gtk /usr/bin/netsurf
 echo "lynx and netsurf are installed"
