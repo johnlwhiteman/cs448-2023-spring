@@ -27,4 +27,4 @@ ${DIR}/setupWireshark
 ${DIR}/setupDesktop
 ${DIR}/setupBrowsers
 appendPath ${DIR}/ .bashrc 
-cd ${PDIR}/juiceshop && make all
+cd ${PDIR}/tinywebsite && ./startTinyWebsite 
