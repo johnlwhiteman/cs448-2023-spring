@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# /etc/ssl/certs/
+export NAME=selfsigned
+rm -f *.key *.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout ${NAME}.key -out ${NAME}.crt
+echo "/etc/ssl/certs/${NAME}.crt"
+echo "/etc/ssl/private/${NAME}.key"

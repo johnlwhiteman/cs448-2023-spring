@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+export NAME=selfsigned
+rm -f *.key *.crt
+openssl req -x509 -nodes -days 365 -subj "/C=US/ST=OR/O=$NAME, Inc./CN=$NAME.org" -addext "subjectAltName=DNS:$NAME.org" -newkey rsa:4096 -keyout $NAME.key -out $NAME.crt && openssl x509 -text -in $NAME.crt -noout
+echo "/etc/ssl/certs/${NAME}.crt"
+echo "/etc/ssl/private/${NAME}.key"
