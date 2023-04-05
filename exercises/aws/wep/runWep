@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
+FILE=${DIR}/wep-crack.pcap
+if [ ! -f "$FILE" ]; then
+    unzip ${DIR}/wep-crack.pcap.zip
+fi
+aircrack-ng -z ${DIR}/${FILE}
