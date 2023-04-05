@@ -36,3 +36,4 @@ ${DIR}/setupBrowsers
 installCertbot
 appendPath ${DIR}/ .bashrc
 cd ${PDIR}/tinywebsite && ./startTinyWebsite &>/dev/null &
+echo "We done ... bye bye!"
