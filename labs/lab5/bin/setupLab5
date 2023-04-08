@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#/usr/bin/env bash
 export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
 
@@ -21,7 +21,7 @@ echo "Please enter a new login password for ubuntu:"
 mkdir -p ${PDIR}/deliverables
 sudo passwd ubuntu
 sudo apt-get update
-sudo apt-get install -y net-tools nmap make openssl tcpreplay traceroute unzip whois
+sudo apt-get install -y net-tools nmap make openssl tcpreplay traceroute unzip whois xfce4-goodies
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupWireshark
