@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
+export PDIR="$(dirname $DIR)"
+
+cd $PDIR
+rm -fr ./evidence.zip ./evidence
+wget --no-check-certificate https://stupidmachines.io/cs448/collateral/evidence.zip
+unzip ./evidence.zip
+rm -f ${PDIR}/evidence.zip

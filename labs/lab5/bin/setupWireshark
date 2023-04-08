@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+sudo apt update
+sudo apt install -y wireshark
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common 
+#sudo dpkg-reconfigure -y wireshark-common 
+sudo usermod -a -G wireshark $USER
+echo "Close this terminal and tart a new terminal"
