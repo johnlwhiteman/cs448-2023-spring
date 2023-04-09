@@ -21,12 +21,13 @@ echo "Please enter a new login password for ubuntu:"
 mkdir -p ${PDIR}/deliverables
 sudo passwd ubuntu
 sudo apt-get update
-sudo apt-get install -y net-tools nmap make openssl tcpreplay traceroute unzip whois xfce4-goodies
+sudo apt-get install -y net-tools nmap make openssl tcpreplay traceroute unzip whois xfce4-goodies zip
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupWireshark
 ${DIR}/setupDesktop
 ${DIR}/setupBrowsers
+echo "Enter the password to unzip this file ... should be in the lab instructions document"
 ${DIR}/gatherEvidence
 appendPath ${DIR}/ .bashrc
 echo "We done ... bye bye!"
