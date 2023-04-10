@@ -1,5 +1,5 @@
 NAME=webapp
-IP=0.0.0.0
+IP=127.0.0.1
 CERT=cert.pem
 
 all: build http
@@ -14,7 +14,7 @@ http:
 	cd webapp; sudo python ./server.py -i $(IP) -p 80
 
 https:
-	cd webapp; sudo python ./server.py -i $(IP) -p 443 -c $(CERT)
+	cd webapp; sudo python ./server.py -i $(IP) -p 443 -S
 
 clean:
 	sudo docker stop -f $(NAME); sudo docker -f rm $(NAME)
