@@ -27,7 +27,7 @@ ${DIR}/setupVim
 ${DIR}/setupWireshark
 ${DIR}/setupDesktop
 ${DIR}/setupBrowsers
-echo "Enter the password to unzip this file ... should be in the lab instructions document"
-${DIR}/gatherEvidence
+${DIR}/setupPython
+${DIR}/setupEvidence
 appendPath ${DIR}/ .bashrc
 echo "We done ... bye bye!"

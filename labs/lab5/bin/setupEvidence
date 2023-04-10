@@ -5,5 +5,6 @@ export PDIR="$(dirname $DIR)"
 cd $PDIR
 rm -fr ./evidence.zip ./evidence
 wget --no-check-certificate https://stupidmachines.io/cs448/collateral/evidence.zip
+echo "Enter the password given to you in the lab instructions"
 unzip ./evidence.zip
 rm -f ${PDIR}/evidence.zip
