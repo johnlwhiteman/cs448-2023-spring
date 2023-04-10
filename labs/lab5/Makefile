@@ -1,5 +1,4 @@
 NAME=webapp
-PORT=12345
 IP=127.0.0.1
 CERT=cert.pem
 
@@ -12,13 +11,13 @@ run:
 	echo "Your docker run command goes here"
 
 http:
-	cd webapp; python ./server.py -i $(IP) -p $(PORT)
+	cd webapp; python ./server.py -i $(IP) -p 80
 
 https:
-	cd webapp; python ./server.py -i $(IP) -p $(PORT) -c $(CERT)
+	cd webapp; python ./server.py -i $(IP) -p 443 -c $(CERT)
 
 clean:
-	sudo kill -9 $(lsof -ti :${PORT}); sudo docker stop -f $(NAME); sudo docker -f rm $(NAME); ./killy;
+	sudo docker stop -f $(NAME); sudo docker -f rm $(NAME)
 
 purge:
 	./purgeAll
