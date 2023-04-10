@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+sudo docker stop -f $(docker ps -aq)
+sudo docker rm -f  $(docker ps -aq)
+sudo docker system prune -f -a --volumes
+sudo docker rmi $(docker images -q)
+PORT=12345
+sudo kill -9 $(lsof -ti :${PORT})
+sudo fuser -i -TERM -k ${PORT}/tcp
+sudo killall python

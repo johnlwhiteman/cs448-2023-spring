@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-sudo kill $(ps aux  | grep 'http.server' | awk '{print $2}') &>/dev/null

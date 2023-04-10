@@ -1,3 +1,7 @@
+*.pem
 *.zip
 deliverables
+Dockerfile.solution
 evidence
+go
+Makefile.solution
