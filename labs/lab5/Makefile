@@ -11,10 +11,10 @@ run:
 	echo "Your docker run command goes here"
 
 http:
-	cd webapp; python ./server.py -i $(IP) -p 80
+	cd webapp; sudo python ./server.py -i $(IP) -p 80
 
 https:
-	cd webapp; python ./server.py -i $(IP) -p 443 -c $(CERT)
+	cd webapp; sudo python ./server.py -i $(IP) -p 443 -c $(CERT)
 
 clean:
 	sudo docker stop -f $(NAME); sudo docker -f rm $(NAME)
