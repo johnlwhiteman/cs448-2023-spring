@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-' OR 1=1 #
-1' or 1=1 UNION SELECT 1,DATABASE() #
+#' OR 1=1 #
+#1' or 1=1 UNION SELECT 1,DATABASE() #
 
 
 
