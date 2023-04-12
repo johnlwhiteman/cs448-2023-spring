@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$#" -lt 1 ]; then
+    echo "You need to provide an IP address that uses TLS"
+    exit 1
+fi
+docker run --rm -ti drwetter/testssl.sh $@

