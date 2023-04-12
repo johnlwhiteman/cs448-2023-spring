@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
+export PDIR="$(dirname $DIR)"
+
 # NewPath .bashrc | .zshrc
 appendPath() {
     BU_PATH=$HOME/$2
