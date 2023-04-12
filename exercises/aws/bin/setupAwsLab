@@ -33,6 +33,7 @@ ${DIR}/setupVim
 ${DIR}/setupWireshark
 ${DIR}/setupDesktop
 ${DIR}/setupBrowsers
+${DIR}/setupPython
 installCertbot
 appendPath ${DIR}/ .bashrc
 cd ${PDIR}/tinywebsite && ./startTinyWebsite &>/dev/null &
