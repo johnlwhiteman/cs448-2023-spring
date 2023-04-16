@@ -20,7 +20,5 @@ sudo apt-get update
 sudo apt-get install -y net-tools nmap openssl traceroute unzip 
 ${DIR}/setupDocker
 ${DIR}/setupVim
-${DIR}/setupDvwa
-${DIR}/setupMetasploitable
 appendPath ${DIR}/ .bashrc
-echo "We are all victims."
+echo "There's not much benefit in attacking an empty house. - Eiji Yoshikawa"

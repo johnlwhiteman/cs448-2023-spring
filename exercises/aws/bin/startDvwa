@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
+${DIR}/stopDvwa
+sudo docker run --rm -it -d -p 80:80 --name dvwa vulnerables/web-dvwa

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-NAME=metasploitable
+NAME=dvwa
 sudo docker stop ${NAME}
 sudo docker rm -f ${NAME}
+sudo docker rmi -f vulnerables/web-dvwa

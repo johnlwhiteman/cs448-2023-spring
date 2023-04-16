@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 NAME=metasploitable
 IP=10.0.0.5
-${DIR}/stopMetasploitable
-sudo docker network create ${NAME} --attachable --subnet 10.0.0.0/24
-sudo docker pull tleemcjr/metasploitable2
+sudo docker stop ${NAME}
+sudo docker rm -f ${NAME}
 sudo docker run \
     -it \
     --network ${NAME} \
