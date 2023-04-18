@@ -10,5 +10,5 @@ sudo docker run \
     --name ${NAME}\
     --hostname metasploitable2 \
     tleemcjr/metasploitable2 \
-    sh -c "/bin/services.sh && bash"
+    sh -c "/bin/services.sh && service apache2 start && bash"
 echo $IP is your target ... 
