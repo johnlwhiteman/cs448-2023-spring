@@ -16,11 +16,10 @@ backupFile() {
         cp $1 $1.ORIGINAL
     fi
 }
-sudo apt-get update
-sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip 
 echo "Enter a new password for ubuntu:"
 sudo passwd ubuntu
 sudo apt-get update
+sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip 
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupDvwa
