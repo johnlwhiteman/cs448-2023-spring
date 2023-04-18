@@ -17,11 +17,18 @@ backupFile() {
     fi
 }
 sudo apt-get update
-sudo apt-get install -y net-tools nmap openssl traceroute unzip 
+sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip 
+echo "Enter a new password for ubuntu:"
+sudo passwd ubuntu
+sudo apt-get update
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupDvwa
 ${DIR}/setupMetasploit
 ${DIR}/setupMetasploitable
+${DIR}/getRockYouWordList
+${DIR}/setupDesktop
+${DIR}/setupBrowsers
+${DIR}/setupPython
 appendPath ${DIR}/ .bashrc
 echo "Si penyerang selesai!"
