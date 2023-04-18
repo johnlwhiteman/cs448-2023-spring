@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+netsurf http://10.0.0.5

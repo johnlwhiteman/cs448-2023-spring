@@ -1,3 +1,6 @@
+netsurf http://10.0.0.5
+startMetasploitableBrowser
+
 # Metasploit -> Metasploitable2
 msfconsole
 
