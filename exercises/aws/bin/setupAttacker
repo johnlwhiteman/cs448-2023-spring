@@ -20,7 +20,7 @@ echo "Enter a new password for user ubuntu:"
 sudo passwd ubuntu
 sudo apt-get update
 sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip
-${DIR}/setupDesktop
+#${DIR}/setupDesktop
 ${DIR}/setupBrowsers
 ${DIR}/setupDocker
 ${DIR}/setupVim
