@@ -21,13 +21,13 @@ sudo passwd ubuntu
 sudo apt-get update
 sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip
 ${DIR}/setupDesktop
+${DIR}/setupBrowsers
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupDvwa
 ${DIR}/setupMetasploit
 ${DIR}/setupMetasploitable
 ${DIR}/getRockYouWordList
-${DIR}/setupBrowsers
 ${DIR}/setupPython
 appendPath ${DIR}/ .bashrc
 echo "Si penyerang selesai!"
