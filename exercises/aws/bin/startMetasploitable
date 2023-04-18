@@ -11,3 +11,4 @@ sudo docker run \
     --hostname metasploitable2 \
     tleemcjr/metasploitable2 \
     sh -c "/bin/services.sh && bash"
+echo $IP is your target ... 

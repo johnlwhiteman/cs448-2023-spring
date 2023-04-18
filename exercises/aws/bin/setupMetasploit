@@ -1,0 +1,7 @@
+
+#!/usr/bin/env bash
+cd /tmp
+wget https://apt.metasploit.com/pool/main/m/metasploit-framework/metasploit-framework_6.3.13%2B20230417102749~1rapid7-1_amd64.deb
+sudo dpkg -i ./metasploit-framework_6.3.13+20230417102749~1rapid7-1_amd64.deb
+rm -f *.deb
+echo "msfconsole"
