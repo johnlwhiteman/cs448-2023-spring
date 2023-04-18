@@ -20,13 +20,13 @@ echo "Enter a new password for user ubuntu:"
 sudo passwd ubuntu
 sudo apt-get update
 sudo apt-get install -y net-tools nmap openssl sqlmap traceroute unzip
+${DIR}/setupDesktop
 ${DIR}/setupDocker
 ${DIR}/setupVim
 ${DIR}/setupDvwa
 ${DIR}/setupMetasploit
 ${DIR}/setupMetasploitable
 ${DIR}/getRockYouWordList
-${DIR}/setupDesktop
 ${DIR}/setupBrowsers
 ${DIR}/setupPython
 appendPath ${DIR}/ .bashrc
