@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 export DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export PDIR="$(dirname $DIR)"
-export TDIR="${PDIR}/metasploit"
-export FILE="${PDIR}/metasploit/rockyou.txt"
+export TDIR="${PDIR}/sqlmap"
+export FILE="${PDIR}/sqlmap/rockyou.txt"
 cd $TDIR
 if [ ! -f "$FILE" ]; then 
     wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
